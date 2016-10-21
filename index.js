@@ -3,7 +3,7 @@ var cheerio = require("cheerio");
 var async = require("async");
 
 var pathOfTheJsonFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-spider-startup-response.json";
-var pathOfTheOutputFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-emails-002.json"
+var pathOfTheOutputFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-emails-big.json"
     //"/Users/prasannav/Work/NUS-ISS/crawler/techsgio-emails-001.json"
 
 var fs = require('fs');
@@ -19,9 +19,7 @@ var q = async.queue(function (task, callback) {
             var email = decodeHash($("[data-cfemail]").attr("data-cfemail"));
 
             var website = $('.mb15').last().children().last().children().first().text()
-
-            console.log("Website => " + website )
-            var content  = email +" , "+key +" , " + website +"\n";
+            var content  = email +" , "+website +" , " + key +"\n";
             console.log(content);
             fs.appendFile(pathOfTheOutputFile, content, function (err) {
                 if(err) { console.log(err)}

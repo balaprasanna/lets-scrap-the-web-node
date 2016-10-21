@@ -1,9 +1,9 @@
 var request = require("request");
 var cheerio = require("cheerio");
 
-var pathOfTheJsonFile = "/Users/prasannav/Work/NUS-ISS/crawler/sample.json";
+var pathOfTheJsonFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-spider-startup-response.json";
 
-var pathOfTheOutputFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-emails.json"
+var pathOfTheOutputFile = "/Users/prasannav/Work/NUS-ISS/crawler/techsgio-emails-big.json"
 
 var fs = require('fs');
 
@@ -38,7 +38,7 @@ function makeReqAndParse(i, url, key) {
         if (!error && response.statusCode == 200) {
             var $ = cheerio.load(html);
             var email = decodeHash($("[data-cfemail]").attr("data-cfemail"));
-            var content  = email +" , "+key +"\n "+ url+ "\n";
+            var content  = email +" , "+key +" , "+ url+ "\n";
             // console.log(content);
             fs.appendFile(pathOfTheOutputFile, content, function (err) {
                 if(err) { console.log(err)}
